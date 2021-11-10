@@ -1,8 +1,8 @@
 ---
 
-#plugins:
+plugins:
   # https://github.com/jest-community/eslint-plugin-jest
-  #  - jest
+  - jest
 
 # https://eslint.org/docs/user-guide/configuring#specifying-environments
 env:
