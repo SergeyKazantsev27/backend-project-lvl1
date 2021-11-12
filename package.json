@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/SergeyKazantsev27/backend-project-lvl1#readme",
   "bin": {
-    "brain-games": "bin/brain-games.js"
+    "brain-games": "bin/brain-games.js",
+    "brain-even": "bin/brain-even.js"
   },
   "dependencies": {
     "eslint": "^8.2.0",
