@@ -32,7 +32,7 @@ const game = {
       if (game.score === 3) {
         console.log(`Congratulations, ${game.userName}!`);
       }
-    } while (this.score < 3);
+    } while (game.score < 3);
   },
 };
 
