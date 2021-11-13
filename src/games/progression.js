@@ -27,11 +27,7 @@ const runGame = () => {
         return progressionWithHiddenNum.push(rec);
       }, []);
 
-      let questionString = '';
-
-      // eslint-disable-next-line no-return-assign
-      progressionWithHiddenNum.reduce((acc, rec) => questionString += ` ${rec}`, '');
-
+      const questionString = `${progressionWithHiddenNum}`.split(',').join(' ');
       const question = `${questionString}`;
       // eslint-disable-next-line consistent-return
       const answer = () => `${randomItemFromProgression}`;
