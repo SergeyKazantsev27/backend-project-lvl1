@@ -1,20 +1,18 @@
 import readlineSync from 'readline-sync';
+import sayMyName from './cli.js';
 
 const game = {
   score: 0,
-  sayHello() {
-    console.log('Welcome to the Brain Games!');
-  },
-  getUserName() {
-    const name = readlineSync.question('May I have your name? ');
-    console.log(`Hello, ${name}!`);
-    game.userName = name;
-  },
   run(title, callback) {
-    game.sayHello();
-    game.getUserName();
+    game.userName = sayMyName();
     console.log(title);
-    do {
+
+    for (game.score; game.score <= 4; game.score += 1) {
+      if (game.score === 3) {
+        console.log(`Congratulations, ${game.userName}!`);
+        break;
+      }
+
       const [gameQuestion, correctAnswer] = callback();
 
       console.log(`Question: ${gameQuestion}`);
@@ -28,11 +26,7 @@ const game = {
         console.log(`Let's try again, ${game.userName}!`);
         break;
       }
-
-      if (game.score === 3) {
-        console.log(`Congratulations, ${game.userName}!`);
-      }
-    } while (game.score < 3);
+    }
   },
 };
 
