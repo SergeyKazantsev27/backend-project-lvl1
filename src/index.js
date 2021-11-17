@@ -1,14 +1,15 @@
 import readlineSync from 'readline-sync';
 import sayMyName from './cli.js';
 
+let score = 0;
+
 const game = {
-  score: 0,
   run(title, callback) {
     game.userName = sayMyName();
     console.log(title);
 
-    for (game.score; game.score <= 4; game.score += 1) {
-      if (game.score === 3) {
+    for (score; score <= 3; score += 1) {
+      if (score === 3) {
         console.log(`Congratulations, ${game.userName}!`);
         break;
       }
@@ -20,7 +21,6 @@ const game = {
 
       if (userAnswer === correctAnswer) {
         console.log('Correct!');
-        game.score += 1;
       } else {
         console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
         console.log(`Let's try again, ${game.userName}!`);
