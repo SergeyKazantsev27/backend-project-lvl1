@@ -22,7 +22,7 @@ const runGame = () => {
   console.log(gameDescription);
 
   while (score < maxScore) {
-    if (generateRound() === true) {
+    if (generateRound()) {
       score += 1;
     } else {
       break;
