@@ -1,8 +1,16 @@
-import game from '../index.js';
+import gameLogic, { userName } from '../index.js';
 
+// game description
+const gameDescription = 'What is the result of the expression?';
+
+// round rules
+let currentRound = 0;
+const maxRound = 3;
+
+// game logic
 const operations = ['+', '-', '*'];
-
 const getRandomOperation = () => operations[Math.floor(Math.random() * operations.length)];
+const getRandomNumber = () => Math.floor(Math.random() * 10) * 2 + 1;
 
 const getOperationResult = (firstOperand, secondOperand, operation) => {
   switch (operation) {
@@ -17,20 +25,30 @@ const getOperationResult = (firstOperand, secondOperand, operation) => {
   }
 };
 
-const runGame = () => {
-  game.run(
-    'What is the result of the expression?',
-    (() => {
-      const randomOperation = getRandomOperation();
-      const questionParam = [Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        randomOperation];
+// generate rounds
+const generateRound = () => {
+  // eslint-disable-next-line max-len
+  const [firstOperand, secondOperand, randomOperation] = [getRandomNumber(), getRandomNumber(), getRandomOperation()];
+  const question = `${firstOperand} ${randomOperation} ${secondOperand}`;
+  const correctAnswer = getOperationResult(firstOperand, secondOperand, randomOperation);
+  return gameLogic(gameDescription, question, correctAnswer);
+};
 
-      const question = `${questionParam[0]} ${questionParam[2]} ${questionParam[1]}`;
-      const answer = () => getOperationResult(questionParam[0], questionParam[1], questionParam[2]);
-      return [question, answer()];
-    }),
-  );
+// run rounds
+const runGame = () => {
+  console.log(gameDescription);
+
+  while (currentRound < maxRound) {
+    if (generateRound()) {
+      currentRound += 1;
+    } else {
+      break;
+    }
+  }
+
+  if (currentRound === 3) {
+    console.log(`Congratulations, ${userName}!`);
+  }
 };
 
 export default runGame;

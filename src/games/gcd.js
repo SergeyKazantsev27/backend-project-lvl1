@@ -1,4 +1,14 @@
-import game from '../index.js';
+import gameLogic, { userName } from '../index.js';
+
+// game description
+const gameDescription = 'Find the greatest common divisor of given numbers.';
+
+// round rules
+let currentRound = 0;
+const maxRound = 3;
+
+// game logic
+const getRandomNumber = () => Math.floor(Math.random() * 100);
 
 const gcd = (num1, num2) => {
   const num1Dividers = [];
@@ -26,17 +36,30 @@ const gcd = (num1, num2) => {
   return `${commonDividers[commonDividers.length - 1]}`;
 };
 
+// generate rounds
+const generateRound = () => {
+  const [firstRandomNumber, secondRandomNumber] = [getRandomNumber(), getRandomNumber()];
+
+  const question = `${firstRandomNumber} ${secondRandomNumber}`;
+  const correctAnswer = gcd(firstRandomNumber, secondRandomNumber);
+  return gameLogic(gameDescription, question, correctAnswer);
+};
+
+// run rounds
 const runGame = () => {
-  game.run(
-    'Find the greatest common divisor of given numbers.',
-    () => {
-      const questionParam = [Math.floor(Math.random() * 100),
-        Math.floor(Math.random() * 100)];
-      const question = `${questionParam[0]} ${questionParam[1]}`;
-      const answer = () => gcd(questionParam[0], questionParam[1]);
-      return [question, answer()];
-    },
-  );
+  console.log(gameDescription);
+
+  while (currentRound < maxRound) {
+    if (generateRound()) {
+      currentRound += 1;
+    } else {
+      break;
+    }
+  }
+
+  if (currentRound === 3) {
+    console.log(`Congratulations, ${userName}!`);
+  }
 };
 
 export default runGame;

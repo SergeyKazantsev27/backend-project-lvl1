@@ -4,8 +4,8 @@ import gameLogic, { userName } from '../index.js';
 const gameDescription = 'Answer "yes" if the number is even, otherwise answer "no".';
 
 // round rules
-let score = 0;
-const maxScore = 3;
+let currentRound = 0;
+const maxRound = 3;
 
 // game logic
 const isEven = (num) => (num % 2) === 0;
@@ -21,15 +21,15 @@ const generateRound = () => {
 const runGame = () => {
   console.log(gameDescription);
 
-  while (score < maxScore) {
+  while (currentRound < maxRound) {
     if (generateRound()) {
-      score += 1;
+      currentRound += 1;
     } else {
       break;
     }
   }
 
-  if (score === 3) {
+  if (currentRound === 3) {
     console.log(`Congratulations, ${userName}!`);
   }
 };
