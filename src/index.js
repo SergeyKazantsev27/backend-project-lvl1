@@ -3,7 +3,7 @@ import sayMyName from './cli.js';
 
 export const userName = sayMyName();
 
-const gameLogic = (gameDescription, question, correctAnswer) => {
+const runGameLogic = (description, question, correctAnswer) => {
   console.log(`Question: ${question}`);
   const userAnswer = readlineSync.question('Your answer: ');
 
@@ -16,4 +16,4 @@ const gameLogic = (gameDescription, question, correctAnswer) => {
   return false;
 };
 
-export default gameLogic;
+export default runGameLogic;

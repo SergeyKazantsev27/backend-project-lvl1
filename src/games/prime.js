@@ -1,7 +1,8 @@
-import gameLogic, { userName } from '../index.js';
+import runGameLogic, { userName } from '../index.js';
+import generateNumber from '../utils.js';
 
 // game description
-const gameDescription = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 // round rules
 let currentRound = 0;
@@ -23,14 +24,14 @@ const isPrime = (num) => {
 
 // generate rounds
 const generateRound = () => {
-  const question = (Math.floor(Math.random() * 100) + 1);
+  const question = generateNumber(1, 100);
   const correctAnswer = isPrime(question) ? 'yes' : 'no';
-  return gameLogic(gameDescription, question, correctAnswer);
+  return runGameLogic(description, question, correctAnswer);
 };
 
 // run rounds
 const runGame = () => {
-  console.log(gameDescription);
+  console.log(description);
 
   while (currentRound < maxRound) {
     if (generateRound()) {

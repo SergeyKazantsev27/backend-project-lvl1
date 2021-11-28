@@ -1,18 +1,19 @@
-import gameLogic, { userName } from '../index.js';
+import runGameLogic, { userName } from '../index.js';
+import generateNumber from '../utils.js';
 
 // game description
-const gameDescription = 'What is the result of the expression?';
+const description = 'What is the result of the expression?';
 
 // round rules
 let currentRound = 0;
 const maxRound = 3;
 
 // game logic
-const operations = ['+', '-', '*'];
-const getRandomOperation = () => operations[Math.floor(Math.random() * operations.length)];
-const getRandomNumber = () => Math.floor(Math.random() * 10) * 2 + 1;
+const operations = '+-*';
+const randomIndexOperator = () => operations[generateNumber(0, operations.length - 1)];
+const getRandomNumber = () => generateNumber(1, 10);
 
-const getOperationResult = (firstOperand, secondOperand, operation) => {
+const getOperationResult = (operation, firstOperand, secondOperand) => {
   switch (operation) {
     case '+':
       return `${firstOperand + secondOperand}`;
@@ -27,16 +28,17 @@ const getOperationResult = (firstOperand, secondOperand, operation) => {
 
 // generate rounds
 const generateRound = () => {
-  // eslint-disable-next-line max-len
-  const [firstOperand, secondOperand, randomOperation] = [getRandomNumber(), getRandomNumber(), getRandomOperation()];
+  const firstOperand = getRandomNumber();
+  const secondOperand = getRandomNumber();
+  const randomOperation = randomIndexOperator();
   const question = `${firstOperand} ${randomOperation} ${secondOperand}`;
-  const correctAnswer = getOperationResult(firstOperand, secondOperand, randomOperation);
-  return gameLogic(gameDescription, question, correctAnswer);
+  const correctAnswer = getOperationResult(randomOperation, firstOperand, secondOperand);
+  return runGameLogic(description, question, correctAnswer);
 };
 
 // run rounds
 const runGame = () => {
-  console.log(gameDescription);
+  console.log(description);
 
   while (currentRound < maxRound) {
     if (generateRound()) {
