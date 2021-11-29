@@ -9,7 +9,7 @@ let currentRound = 0;
 const maxRound = 3;
 
 // game logic
-const getRandomNumber = generateNumber(1, 100);
+const getRandomNumber = () => generateNumber(1, 100);
 
 const gcd = (num1, num2) => {
   const num1Dividers = [];
@@ -39,7 +39,8 @@ const gcd = (num1, num2) => {
 
 // generate rounds
 const generateRound = () => {
-  const [firstRandomNumber, secondRandomNumber] = [getRandomNumber(), getRandomNumber()];
+  const firstRandomNumber = getRandomNumber();
+  const secondRandomNumber = getRandomNumber();
 
   const question = `${firstRandomNumber} ${secondRandomNumber}`;
   const correctAnswer = gcd(firstRandomNumber, secondRandomNumber);
